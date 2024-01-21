@@ -1,0 +1,687 @@
+python3  ./nv_classification_flow.py   \
+--data-dir=./deps/image1000test200  \
+--sensitivity \
+--num-calib-batch=1 \
+--evaluate-onnx  \
+--calibrator=histogram \
+--out-dir=./tmp \
+--ckpt-path=./deps/resnet18-5c106cde.pth \
+--model-name=resnet18
+
+# --pretrained  &  --ckpt-path  mutual exclusion
+
+Classification quantization flow script
+Namespace(batch_size_onnx=1, batch_size_test=128, batch_size_train=128, calibrator='histogram', ckpt_path='./deps/resnet18-5c106cde.pth', ckpt_url='', data_dir='./deps/image1000test200', disable_pcq=False, evaluate_onnx=True, model_name='resnet18', num_calib_batch=1, num_finetune_epochs=0, out_dir='./tmp', percentile=[99.9, 99.99, 99.999, 99.9999], pretrained=False, print_freq=20, seed=12345, sensitivity=True, threshold=-1.0)
+use manual q-dq, pretrained: False
+load state dict
+ResNet(
+  (conv1): QuantConv2d(
+    3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+    (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+  )
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): QuantLinear(
+    in_features=512, out_features=1000, bias=True
+    (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=dynamic calibrator=HistogramCalibrator scale=1.0 quant)
+    (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=dynamic calibrator=MaxCalibrator scale=1.0 quant)
+  )
+)
+Loading data
+Loading training data
+Took 0.0025606155395507812
+Loading validation data
+Creating data loaders
+Initial evaluation:
+Test:  [0/2]  eta: 0:00:03  loss: 13.6217 (13.6217)  acc1: 0.0000 (0.0000)  acc5: 0.0000 (0.0000)  time: 1.9033  data: 1.7645  max mem: 903
+Test: Total time: 0:00:02
+ * Acc@1 0.000 Acc@5 0.000
+Calibrating model
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:15<00:00, 15.59s/it]
+99.9 percentile calibration
+WARNING: Logging before flag parsing goes to stderr.
+W0613 18:30:53.674963 140528183703360 tensor_quantizer.py:240] Call .cuda() if running on GPU after loading calibrated amax.
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6387 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.9605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8614 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.7030 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2734 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.5746 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8909 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.1740 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.4669 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.2802 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2609 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.1539 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=8.1671 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+99.99 percentile calibration
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6387 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.9605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8614 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.7030 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2734 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.5746 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8909 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.1740 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.4669 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.2802 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2609 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.1539 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=8.1671 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+99.999 percentile calibration
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6387 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.9605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8614 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.7030 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2734 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.5746 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8909 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.1740 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.4669 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.2802 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2609 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.1539 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=8.1671 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+99.9999 percentile calibration
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6387 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.9605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.5073 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8614 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.6993 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.7030 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.2321 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2734 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.5746 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.6605 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8909 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.2738 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.1740 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.4669 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.4517 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.2802 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=2.5439 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.2609 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.1539 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7070 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=8.1671 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+mse calibration
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6394 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.7619 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.7602 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.7619 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.9926 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.2609 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.9926 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.6660 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.1032 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.6660 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7054 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.3535 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.1666 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.3535 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.0898 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.4771 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.0898 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.3960 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.7436 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.1945 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.7436 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.2174 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.8258 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.2174 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.4863 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.9657 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.7048 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.9657 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=9.5109 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+entropy calibration
+conv1._input_quantizer                  : TensorQuantizer(8bit fake per-tensor amax=2.6400 calibrator=HistogramCalibrator scale=1.0 quant)
+conv1._weight_quantizer                 : TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.2149 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5036 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=4.2149 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.4724 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.2714 calibrator=HistogramCalibrator scale=1.0 quant)
+layer1.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+layer1.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=4.4724 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=5.2465 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.3208 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=5.2465 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.8600 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.8342 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.5667 calibrator=HistogramCalibrator scale=1.0 quant)
+layer2.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+layer2.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=3.8342 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.5324 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.6470 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=4.5324 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=1.4978 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.1628 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.3853 calibrator=HistogramCalibrator scale=1.0 quant)
+layer3.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+layer3.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=4.1628 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=3.5338 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=2.0715 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.downsample.0._input_quantizer  : TensorQuantizer(8bit fake per-tensor amax=3.5338 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.0.downsample.0._weight_quantizer : TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.0.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=2.7359 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=4.0201 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv1._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.conv2._input_quantizer         : TensorQuantizer(8bit fake per-tensor amax=1.9455 calibrator=HistogramCalibrator scale=1.0 quant)
+layer4.1.conv2._weight_quantizer        : TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+layer4.1.residual_quantizer             : TensorQuantizer(8bit fake per-tensor amax=4.0201 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._input_quantizer                     : TensorQuantizer(8bit fake per-tensor amax=8.5265 calibrator=HistogramCalibrator scale=1.0 quant)
+fc._weight_quantizer                    : TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+ResNet(
+  (conv1): QuantConv2d(
+    3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+    (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.6400 calibrator=HistogramCalibrator scale=1.0 quant)
+    (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0000, 1.0165](64) calibrator=MaxCalibrator scale=1.0 quant)
+  )
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.2149 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1761, 0.7993](64) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.5036 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0919, 0.4879](64) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.2149 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.4724 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1268, 0.6491](64) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.2714 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1042, 0.3806](64) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.4724 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=5.2465 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1239, 0.3405](128) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.3208 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1058, 0.4272](128) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=5.2465 calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0416, 0.7802](128) calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.8600 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=3.8342 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.1004, 0.4387](128) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.5667 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0746, 0.3557](128) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=3.8342 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.5324 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0895, 0.3920](256) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.6470 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0806, 0.3335](256) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.5324 calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0505, 0.2677](256) calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=1.4978 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.1628 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0727, 0.2960](256) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.3853 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0392, 0.3295](256) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.1628 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): QuantConv2d(
+        256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=3.5338 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0637, 0.3826](512) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.0715 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0559, 0.3487](512) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): QuantConv2d(
+          256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=3.5338 calibrator=HistogramCalibrator scale=1.0 quant)
+          (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0322, 0.7472](512) calibrator=MaxCalibrator scale=1.0 quant)
+        )
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=2.7359 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+    (1): BasicBlock(
+      (conv1): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.0201 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0537, 0.2658](512) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): QuantConv2d(
+        512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=1.9455 calibrator=HistogramCalibrator scale=1.0 quant)
+        (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.0485, 0.2718](512) calibrator=MaxCalibrator scale=1.0 quant)
+      )
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (residual_quantizer): TensorQuantizer(8bit fake per-tensor amax=4.0201 calibrator=HistogramCalibrator scale=1.0 quant)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): QuantLinear(
+    in_features=512, out_features=1000, bias=True
+    (_input_quantizer): TensorQuantizer(8bit fake per-tensor amax=8.5265 calibrator=HistogramCalibrator scale=1.0 quant)
+    (_weight_quantizer): TensorQuantizer(8bit fake axis=0 amax=[0.2172, 0.7152](1000) calibrator=MaxCalibrator scale=1.0 quant)
+  )
+)

@@ -1,0 +1,134 @@
+igs@igs:~/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2$ python3 setup.py build
+/home/igs/.local/lib/python3.6/site-packages/setuptools/installer.py:30: SetuptoolsDeprecationWarning: setuptools.installer is deprecated. Requirements should be satisfied by a PEP 517 installer.
+  SetuptoolsDeprecationWarning,
+running build
+running build_py
+creating build
+creating build/lib.linux-x86_64-3.6
+creating build/lib.linux-x86_64-3.6/pytorch_quantization
+copying pytorch_quantization/tensor_quant.py -> build/lib.linux-x86_64-3.6/pytorch_quantization
+copying pytorch_quantization/quant_modules.py -> build/lib.linux-x86_64-3.6/pytorch_quantization
+copying pytorch_quantization/version.py -> build/lib.linux-x86_64-3.6/pytorch_quantization
+copying pytorch_quantization/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/utils
+copying pytorch_quantization/utils/reduce_amax.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/utils
+copying pytorch_quantization/utils/quant_logging.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/utils
+copying pytorch_quantization/utils/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/utils
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/calib
+copying pytorch_quantization/calib/max.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/calib
+copying pytorch_quantization/calib/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/calib
+copying pytorch_quantization/calib/histogram.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/calib
+copying pytorch_quantization/calib/calibrator.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/calib
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/optim
+copying pytorch_quantization/optim/helper.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/optim
+copying pytorch_quantization/optim/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/optim
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/nn
+copying pytorch_quantization/nn/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn
+copying pytorch_quantization/nn/functional.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/nn/_functions
+copying pytorch_quantization/nn/_functions/quant_rnn.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/_functions
+copying pytorch_quantization/nn/_functions/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/_functions
+creating build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_conv.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_bert.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/_utils.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_instancenorm.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_rnn.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_linear.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/__init__.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_pooling.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/quant_add.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/tensor_quantizer.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+copying pytorch_quantization/nn/modules/clip.py -> build/lib.linux-x86_64-3.6/pytorch_quantization/nn/modules
+running build_ext
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/utils/cpp_extension.py:381: UserWarning: Attempted to use ninja as the BuildExtension backend but we could not find ninja.. Falling back to using the slow distutils backend.
+  warnings.warn(msg.format('we could not find ninja.'))
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/utils/cpp_extension.py:782: UserWarning: The detected CUDA version (11.4) has a minor version mismatch with the version that was used to compile PyTorch (11.3). Most likely this shouldn't be a problem.
+  warnings.warn(CUDA_MISMATCH_WARN.format(cuda_str_version, torch.version.cuda))
+building 'pytorch_quantization.cuda_ext' extension
+creating build/temp.linux-x86_64-3.6
+creating build/temp.linux-x86_64-3.6/home
+creating build/temp.linux-x86_64-3.6/home/igs
+creating build/temp.linux-x86_64-3.6/home/igs/workspace
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2
+creating build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src
+gcc -pthread -B /home/igs/anaconda3/compiler_compat -Wl,--sysroot=/ -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/TH -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/igs/anaconda3/include/python3.6m -c /home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp -o build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.o -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE="_gcc" -DPYBIND11_STDLIB="_libstdcpp" -DPYBIND11_BUILD_ABI="_cxxabi1011" -DTORCH_EXTENSION_NAME=cuda_ext -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++14
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp: In function ‘void fake_tensor_quant_(at::Tensor, at::Tensor, int, bool)’:
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:42:19: warning: ‘at::DeprecatedTypeProperties& at::Tensor::type() const’ is deprecated: Tensor.type() is deprecated. Instead use Tensor.options(), which in many cases (e.g. in a constructor) is a drop-in replacement. If you were using data from type(), that is now available from Tensor itself, so instead of tensor.type().scalar_type(), use tensor.scalar_type() instead and instead of tensor.type().backend() use tensor.device(). [-Wdeprecated-declarations]
+   if (inputs.type().is_cuda()) {
+                   ^
+In file included from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Tensor.h:3:0,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Context.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/ATen.h:9,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/types.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader_options.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/base.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/all.h:8,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/extension.h:4,
+                 from /home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:19:
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:194:30: note: declared here
+   DeprecatedTypeProperties & type() const {
+                              ^~~~
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp: In function ‘at::Tensor fake_tensor_quant(at::Tensor, at::Tensor, int, bool)’:
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:51:19: warning: ‘at::DeprecatedTypeProperties& at::Tensor::type() const’ is deprecated: Tensor.type() is deprecated. Instead use Tensor.options(), which in many cases (e.g. in a constructor) is a drop-in replacement. If you were using data from type(), that is now available from Tensor itself, so instead of tensor.type().scalar_type(), use tensor.scalar_type() instead and instead of tensor.type().backend() use tensor.device(). [-Wdeprecated-declarations]
+   if (inputs.type().is_cuda()) {
+                   ^
+In file included from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Tensor.h:3:0,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Context.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/ATen.h:9,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/types.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader_options.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/base.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/all.h:8,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/extension.h:4,
+                 from /home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:19:
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:194:30: note: declared here
+   DeprecatedTypeProperties & type() const {
+                              ^~~~
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp: In function ‘at::Tensor fake_tensor_quant_with_axis(at::Tensor, at::Tensor, int, int, bool)’:
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:63:19: warning: ‘at::DeprecatedTypeProperties& at::Tensor::type() const’ is deprecated: Tensor.type() is deprecated. Instead use Tensor.options(), which in many cases (e.g. in a constructor) is a drop-in replacement. If you were using data from type(), that is now available from Tensor itself, so instead of tensor.type().scalar_type(), use tensor.scalar_type() instead and instead of tensor.type().backend() use tensor.device(). [-Wdeprecated-declarations]
+   if (inputs.type().is_cuda()) {
+                   ^
+In file included from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Tensor.h:3:0,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/Context.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/ATen.h:9,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/types.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader_options.h:4,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/base.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data/dataloader.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/data.h:3,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/all.h:8,
+                 from /home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/extension.h:4,
+                 from /home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.cpp:19:
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:194:30: note: declared here
+   DeprecatedTypeProperties & type() const {
+                              ^~~~
+/usr/local/cuda/bin/nvcc -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/TH -I/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/igs/anaconda3/include/python3.6m -c /home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.cu -o build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE="_gcc" -DPYBIND11_STDLIB="_libstdcpp" -DPYBIND11_BUILD_ABI="_cxxabi1011" -DTORCH_EXTENSION_NAME=cuda_ext -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_86,code=compute_86 -gencode=arch=compute_86,code=sm_86 -std=c++14
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.cu: In lambda function:
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.cu:75:44: warning: ‘at::DeprecatedTypeProperties& at::Tensor::type() const’ is deprecated: Tensor.type() is deprecated. Instead use Tensor.options(), which in many cases (e.g. in a constructor) is a drop-in replacement. If you were using data from type(), that is now available from Tensor itself, so instead of tensor.type().scalar_type(), use tensor.scalar_type() instead and instead of tensor.type().backend() use tensor.device(). [-Wdeprecated-declarations]
+   AT_DISPATCH_FLOATING_TYPES_AND_HALF(inputs.type().scalarType(), "fake_tensor_quant_cuda_inplace", [&] {
+                                            ^
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:194:1: note: declared here
+   DeprecatedTypeProperties & type() const {
+ ^ ~~
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.cu: In lambda function:
+/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.cu:85:44: warning: ‘at::DeprecatedTypeProperties& at::Tensor::type() const’ is deprecated: Tensor.type() is deprecated. Instead use Tensor.options(), which in many cases (e.g. in a constructor) is a drop-in replacement. If you were using data from type(), that is now available from Tensor itself, so instead of tensor.type().scalar_type(), use tensor.scalar_type() instead and instead of tensor.type().backend() use tensor.device(). [-Wdeprecated-declarations]
+   AT_DISPATCH_FLOATING_TYPES_AND_HALF(inputs.type().scalarType(), "fake_tensor_quant_cuda", [&] {
+                                            ^
+/home/igs/anaconda3/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:194:1: note: declared here
+   DeprecatedTypeProperties & type() const {
+ ^ ~~
+g++ -pthread -shared -B /home/igs/anaconda3/compiler_compat -L/home/igs/anaconda3/lib -Wl,-rpath=/home/igs/anaconda3/lib -Wl,--no-as-needed -Wl,--sysroot=/ build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant.o build/temp.linux-x86_64-3.6/home/igs/workspace/cc-dev/cudaacc/share/auto_qat/pytorch-quantization_v2.1.2/src/tensor_quant_gpu.o -L/home/igs/anaconda3/lib/python3.6/site-packages/torch/lib -L/usr/local/cuda/lib64 -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda_cu -ltorch_cuda_cpp -o build/lib.linux-x86_64-3.6/pytorch_quantization/cuda_ext.cpython-36m-x86_64-linux-gnu.so
+
